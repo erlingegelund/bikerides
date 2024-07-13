@@ -13,6 +13,8 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<properties>
 		<java.version>21</java.version>
+		<org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
+		<org.projectlombok.version>1.18.34</org.projectlombok.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -22,6 +24,27 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${org.projectlombok.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct</artifactId>
+			<version>${org.mapstruct.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.openapitools</groupId>
+			<artifactId>jackson-databind-nullable</artifactId>
+			<version>0.2.6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>1.8.0</version>
 		</dependency>
 
 		<dependency>
@@ -49,6 +72,58 @@
 
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.13.0</version>
+				<configuration>
+					<annotationProcessorPaths>
+						<path>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+							<version>${org.projectlombok.version}</version>
+						</path>
+						<path>
+							<groupId>org.mapstruct</groupId>
+							<artifactId>mapstruct-processor</artifactId>
+							<version>${org.mapstruct.version}</version>
+						</path>
+					</annotationProcessorPaths>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<compilerArgs>
+						<compilerArg>-Amapstruct.defaultComponentModel=spring</compilerArg>
+					</compilerArgs>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.openapitools</groupId>
+				<artifactId>openapi-generator-maven-plugin</artifactId>
+				<version>7.7.0</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<inputSpec>${project.basedir}/src/main/resources/api/bike-rides.yaml</inputSpec>
+							<generatorName>spring</generatorName>
+							<apiPackage>dk.eegelund.bikerides.api</apiPackage>
+							<modelPackage>dk.eegelund.bikerides.model</modelPackage>
+							<supportingFilesToGenerate>
+								ApiUtil.java
+							</supportingFilesToGenerate>
+							<configOptions>
+								<dateLibrary>java8</dateLibrary>
+								<useSpringBoot3>true</useSpringBoot3>
+								<useResponseEntity>false</useResponseEntity>
+								<interfaceOnly>true</interfaceOnly>
+								<requestMappingMode>api_interface</requestMappingMode>
+							</configOptions>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>

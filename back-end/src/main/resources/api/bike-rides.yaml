@@ -1,0 +1,95 @@
+openapi: 3.0.3
+info:
+  title: Bike rides API
+  description: Bike rides API for managing bike rides
+  version: 1.0.0
+servers:
+  - url: 'http://localhost:8080/api/bike-rides'
+    description: Local server
+paths:
+  /categories:
+    get:
+      summary: Get all categories
+      operationId: getCategories
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CategoryDto'
+    post:
+        summary: Create a category
+        operationId: createCategory
+        requestBody:
+            required: true
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/CategoryDto'
+        responses:
+            '200':
+              description: OK
+              content:
+                application/json:
+                  schema:
+                      $ref: '#/components/schemas/CategoryDto'
+  /categories/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        description: ID of the category
+        schema:
+          type: integer
+          format: int64
+    put:
+      summary: Update a category
+      operationId: updateCategory
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CategoryDto'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CategoryDto'
+    delete:
+      summary: Delete a category
+      operationId: deleteCategory
+      responses:
+        '200':
+          description: OK
+components:
+  schemas:
+    CategoryDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        description:
+          type: string
+      required:
+        - name
+    MakeDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        description:
+          type: string
+      required:
+        - name
