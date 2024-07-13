@@ -1,0 +1,6 @@
+spring:
+  application.name: bikerides
+  liquibase:
+    change-log: db/changelog/master.xml
+  jpa:
+    generate-ddl: false

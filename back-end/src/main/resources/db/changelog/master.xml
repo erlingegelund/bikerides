@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="1" author="erlingegelund">
+        <createTable tableName="makes">
+            <column name="id" autoIncrement="true" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="pk_make"/>
+            </column>
+            <column name="created_date" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_modified_date" type="datetime"/>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="origin" type="varchar(255)"/>
+            <column name="website" type="varchar(255)"/>
+            <column name="established" type="date"/>
+            <column name="historical_introduction" type="varchar(255)"/>
+        </createTable>
+        <createTable tableName="categories">
+            <column name="id" autoIncrement="true" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="pk_category"/>
+            </column>
+            <column name="created_date" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_modified_date" type="datetime"/>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/></column>
+            <column name="description" type="varchar(255)"/>
+        </createTable>
+        <createTable tableName="models">
+            <column name="id" autoIncrement="true" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="pk_model"/>
+            </column>
+            <column name="created_date" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_modified_date" type="datetime"/>
+            <column name="make_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_model_make" references="makes(id)"/>
+            </column>
+            <column name="category_id" type="bigint">
+                <constraints foreignKeyName="fk_model_category" references="categories(id)"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="short_name" type="varchar(255)"/>
+            <column name="year_from" type="int"/>
+            <column name="year_to" type="int"/>
+            <column name="dry_weight" type="int"/>
+            <column name="wet_weight" type="int"/>
+            <column name="seat_height" type="int"/>
+            <column name="engine_capacity" type="int"/>
+            <column name="engine_power" type="int"/>
+            <column name="engine_torque" type="int"/>
+            <column name="top_speed" type="int"/>
+            <column name="fuel_capacity" type="int"/>
+            <column name="fuel_consumption" type="int"/>
+            <column name="wheelbase" type="int"/>
+            <column name="overall_length" type="int"/>
+            <column name="homologated_for_road_use" defaultValue="true" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <createTable tableName="rides">
+            <column name="id" autoIncrement="true" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="pk_ride"/>
+            </column>
+            <column name="created_date" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_modified_date" type="datetime"/>
+            <column name="model_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_ride_model" references="models(id)"/>
+            </column>
+            <column name="started_at" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ended_at" type="datetime"/>
+            <column name="distance" type="int"/>
+            <column name="own" type="boolean" defaultValue="false">
+                <constraints nullable="false"/>
+            </column>
+            <column name="comment" type="varchar(255)"/>
+            <column name="rating" type="int"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="2" author="erlingegelund">
+        <loadData tableName="categories" file="db/data/categories.csv" separator=";">
+            <column name="created_date" type="datetime"/>
+            <column name="last_modified_date" type="datetime"/>
+            <column name="name" type="varchar(255)"/>
+            <column name="description" type="varchar(255)"/>
+        </loadData>
+    </changeSet>
+</databaseChangeLog>
