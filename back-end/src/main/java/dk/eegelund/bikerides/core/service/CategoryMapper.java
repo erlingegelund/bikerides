@@ -1,4 +1,4 @@
-package dk.eegelund.bikerides.core;
+package dk.eegelund.bikerides.core.service;
 
 import dk.eegelund.bikerides.data.Category;
 import dk.eegelund.bikerides.model.CategoryDto;

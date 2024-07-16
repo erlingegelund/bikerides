@@ -21,21 +21,21 @@ paths:
                 items:
                   $ref: '#/components/schemas/CategoryDto'
     post:
-        summary: Create a category
-        operationId: createCategory
-        requestBody:
-            required: true
-            content:
-              application/json:
-                schema:
-                  $ref: '#/components/schemas/CategoryDto'
-        responses:
-            '200':
-              description: OK
-              content:
-                application/json:
-                  schema:
-                      $ref: '#/components/schemas/CategoryDto'
+      summary: Create a category
+      operationId: createCategory
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CategoryDto'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CategoryDto'
   /categories/{id}:
     parameters:
       - name: id
@@ -67,6 +67,216 @@ paths:
       responses:
         '200':
           description: OK
+  /makes:
+    get:
+      summary: Get all makes
+      operationId: getMakes
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MakeDto'
+    post:
+      summary: Create a make
+      operationId: createMake
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MakeDto'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MakeDto'
+  /makes/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        description: ID of the category
+        schema:
+          type: integer
+          format: int64
+    get:
+      summary: Get a make
+      operationId: getMake
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MakeDto'
+    put:
+      summary: Update a make
+      operationId: updateMake
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MakeDto'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MakeDto'
+    delete:
+      summary: Delete a make
+      operationId: deleteMake
+      responses:
+        '200':
+          description: OK
+  /models:
+    get:
+      summary: Get all models
+      operationId: getModels
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ModelDto'
+    post:
+      summary: Create a model
+      operationId: createModel
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModelDto'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelDto'
+  /models/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        description: ID of the category
+        schema:
+          type: integer
+          format: int64
+    get:
+      summary: Get a model
+      operationId: getModel
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelDto'
+    put:
+      summary: Update a model
+      operationId: updateModel
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModelDto'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelDto'
+    delete:
+      summary: Delete a model
+      operationId: deleteModel
+      responses:
+        '200':
+          description: OK
+  /rides:
+    get:
+      summary: Get all rides
+      operationId: getRides
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RideDto'
+    post:
+      summary: Create a ride
+      operationId: createRide
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RideDto'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RideDto'
+  /rides/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        description: ID of the category
+        schema:
+          type: integer
+          format: int64
+    get:
+      summary: Get a ride
+      operationId: getRide
+      responses:
+        '200':
+          description: OK
+          content:
+              application/json:
+                schema:
+                    $ref: '#/components/schemas/RideDto'
+    put:
+      summary: Update a ride
+      operationId: updateRide
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RideDto'
+      responses:
+          '200':
+            description: OK
+            content:
+              application/json:
+                schema:
+                    $ref: '#/components/schemas/RideDto'
+    delete:
+      summary: Delete a ride
+      operationId: deleteRide
+      responses:
+        '200':
+            description: OK
 components:
   schemas:
     CategoryDto:
@@ -89,7 +299,108 @@ components:
           format: int64
         name:
           type: string
-        description:
+          maxLength: 255
+        origin:
           type: string
+          maxLength: 255
+        website:
+          type: string
+          maxLength: 255
+        established:
+          type: string
+          format: date
+        historicalIntroduction:
+          type: string
+          maxLength: 255
       required:
         - name
+    ModelDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        makeId:
+          type: integer
+          format: int64
+        categoryId:
+          type: integer
+          format: int64
+        name:
+          type: string
+          maxLength: 255
+        shortName:
+          type: string
+          maxLength: 255
+        yearFrom:
+          type: integer
+          format: int32
+        yearTo:
+          type: integer
+          format: int32
+        dryWeight:
+          type: integer
+          format: int32
+        wetWeight:
+          type: integer
+          format: int32
+        seatHeight:
+          type: integer
+          format: int32
+        engineCapacity:
+          type: integer
+          format: int32
+        enginePower:
+          type: integer
+          format: int32
+        engineTorque:
+          type: integer
+          format: int32
+        topSpeed:
+          type: integer
+          format: int32
+        fuelCapacity:
+          type: integer
+          format: int32
+        fuelConsumption:
+          type: integer
+          format: int32
+        wheelbase:
+          type: integer
+          format: int32
+        overallLength:
+          type: integer
+          format: int32
+        homologatedForRoadUse:
+          type: boolean
+      required:
+        - name
+    RideDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        modelId:
+          type: integer
+          format: int64
+        startedAt:
+          type: string
+          format: date-time
+        endedAt:
+          type: string
+          format: date-time
+        distance:
+          type: number
+          format: double
+        own:
+          type: boolean
+        comment:
+          type: string
+          maxLength: 255
+        rating:
+          type: integer
+          format: int32
+      required:
+        - model
+        - startedAt

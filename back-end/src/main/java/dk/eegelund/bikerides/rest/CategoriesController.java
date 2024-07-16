@@ -3,24 +3,19 @@ package dk.eegelund.bikerides.rest;
 import dk.eegelund.bikerides.api.CategoriesApi;
 import dk.eegelund.bikerides.core.CategoryService;
 import dk.eegelund.bikerides.model.CategoryDto;
-import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.NativeWebRequest;
 
 import java.util.List;
-import java.util.Optional;
 
-@RequiredArgsConstructor
 @RestController
-public class CategoriesController implements CategoriesApi {
-    private final NativeWebRequest request;
+public class CategoriesController extends ApiController implements CategoriesApi {
     private final CategoryService categoryService;
 
-    @Override
-    public Optional<NativeWebRequest> getRequest() {
-        return Optional.ofNullable(request);
+    public CategoriesController(NativeWebRequest request, CategoryService categoryService) {
+        super(request);
+        this.categoryService = categoryService;
     }
-
 
     @Override
     public CategoryDto createCategory(CategoryDto category) {

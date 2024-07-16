@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "makes")
+@Table(name = "models")
 public class Model extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "make_id", nullable = false)
