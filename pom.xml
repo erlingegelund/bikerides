@@ -14,5 +14,6 @@
     </profiles>
     <modules>
         <module>back-end</module>
+        <module>front-end</module>
     </modules>
 </project>
