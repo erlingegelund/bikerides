@@ -66,6 +66,10 @@
             },
             "development": {
               "buildTarget": "bike-rides:build:development"
+            },
+            "options": {
+              "browserTarget": "bike-rides:build",
+              "proxyConfig": "src/proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"
@@ -97,5 +101,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }
