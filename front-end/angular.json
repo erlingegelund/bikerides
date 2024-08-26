@@ -61,19 +61,10 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
-          "configurations": {
-            "production": {
-              "buildTarget": "bike-rides:build:production"
-            },
-            "development": {
-              "buildTarget": "bike-rides:build:development"
-            },
-            "options": {
-              "browserTarget": "bike-rides:build",
-              "proxyConfig": "src/proxy.conf.json"
-            }
-          },
-          "defaultConfiguration": "development"
+          "options": {
+            "buildTarget": "bike-rides:build",
+            "proxyConfig": "src/proxy.conf.json"
+          }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",

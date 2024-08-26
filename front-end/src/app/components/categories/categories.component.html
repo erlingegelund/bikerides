@@ -1,1 +1,25 @@
-<p>categories works!</p>
+<div class="br-category">
+  <h2>Categories</h2>
+  <table>
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>
+        <button mat-icon-button>
+          <mat-icon fontIcon="add"></mat-icon>
+        </button>
+      </th>
+    </tr>
+    </thead>
+    <tr *ngFor="let category of categories">
+      <td>{{ category.name }}</td>
+      <td>{{ category.description }}</td>
+      <td>
+        <button mat-icon-button>
+          <mat-icon fontIcon="delete"></mat-icon>
+        </button>
+      </td>
+    </tr>
+  </table>
+</div>

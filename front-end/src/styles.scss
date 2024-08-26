@@ -2,3 +2,6 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+table {border: 1px solid #cc6666; border-collapse: collapse; width: 100%;}
+th, td {border: 1px solid #cc6666; padding: 4px;}
+th { text-align: left; background-color: #cc6666; color: white; border: 1px solid #ff8888; padding: 4px;}

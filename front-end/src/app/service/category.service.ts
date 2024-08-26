@@ -3,9 +3,9 @@ import {HttpClient} from "@angular/common/http";
 import {Injectable} from "@angular/core";
 import {Category} from "../model/category.model";
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class CategoryService {
-  private baseUrl = '/api/v1/categories';
+  private baseUrl = '/api/bike-rides/categories';
 
   constructor(private http: HttpClient) { }
 
