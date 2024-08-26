@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>dk.eegelund</groupId>
-	<artifactId>bikerides-backend</artifactId>
+	<artifactId>bikerides-back-end</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<properties>
 		<java.version>21</java.version>
@@ -104,7 +104,6 @@
 			<plugin>
 				<groupId>org.openapitools</groupId>
 				<artifactId>openapi-generator-maven-plugin</artifactId>
-				<version>7.7.0</version>
 				<executions>
 					<execution>
 						<goals>

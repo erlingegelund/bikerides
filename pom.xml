@@ -9,11 +9,31 @@
     <description>Demo for using java.time.Instant when serializing</description>
     <packaging>pom</packaging>
     <profiles>
-        <profile><id>h2</id></profile>
-        <profile><id>mssql</id></profile>
+        <profile>
+            <id>h2</id>
+        </profile>
+        <profile>
+            <id>mssql</id>
+        </profile>
     </profiles>
     <modules>
         <module>back-end</module>
         <module>front-end</module>
     </modules>
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.openapitools</groupId>
+                    <artifactId>openapi-generator-maven-plugin</artifactId>
+                    <version>7.7.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>3.3.0</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 </project>
