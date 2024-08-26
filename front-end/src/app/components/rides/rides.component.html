@@ -1,1 +1,35 @@
-<p>rides works!</p>
+<div class="br-ride">
+  <h2>Makes</h2>
+  <table>
+    <thead>
+    <tr>
+      <th>Make</th>
+      <th>Model</th>
+      <th>Started</th>
+      <th>Ended</th>
+      <th>Distance</th>
+      <th>Ownership</th>
+      <th>Comment</th>
+      <th>
+        <button mat-icon-button>
+          <mat-icon fontIcon="add"></mat-icon>
+        </button>
+      </th>
+    </tr>
+    </thead>
+    <tr *ngFor="let ride of rides">
+      <td>{{ getMake(ride.modelId) }}</td>
+      <td>{{ getModelName(ride.modelId) | async }}</td>
+      <td>{{ ride.startedAt | date: 'medium'}}</td>
+      <td>{{ ride.endedAt | date: 'medium'}}</td>
+      <td>{{ ride.distance }}</td>
+      <td>{{ ride.own ? 'Own' : 'Dealership' }}</td>
+      <td>{{ truncateWithEllipsis(ride.comment) }}</td>
+      <td>
+        <button mat-icon-button>
+          <mat-icon fontIcon="delete"></mat-icon>
+        </button>
+      </td>
+    </tr>
+  </table>
+</div>

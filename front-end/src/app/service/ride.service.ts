@@ -3,7 +3,7 @@ import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {Injectable} from "@angular/core";
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class RideService {
   private baseUrl = '/api/v1/rides';
 
