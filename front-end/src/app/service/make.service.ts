@@ -3,9 +3,9 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Make} from "../model/make.model";
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class MakeService {
-  private baseUrl = '/api/v1/makes';
+  private baseUrl = '/api/bike-rides/makes';
 
   constructor(private http: HttpClient) {
   }

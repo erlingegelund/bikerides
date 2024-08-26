@@ -1,1 +1,31 @@
-<p>makes works!</p>
+<div class="br-make">
+  <h2>Makes</h2>
+  <table>
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Origin</th>
+      <th>Website</th>
+      <th>Established</th>
+      <th>History</th>
+      <th>
+        <button mat-icon-button>
+          <mat-icon fontIcon="add"></mat-icon>
+        </button>
+      </th>
+    </tr>
+    </thead>
+    <tr *ngFor="let make of makes">
+      <td>{{ make.name }}</td>
+      <td>{{ make.origin }}</td>
+      <td><a [href]="make.website" target="_blank">{{ make.website }}</a></td>
+      <td>{{ asDate(make.established) | date :'mediumDate' }}</td>
+      <td>{{ truncateWithEllipsis(make.historicalIntroduction) }}</td>
+      <td>
+        <button mat-icon-button>
+          <mat-icon fontIcon="delete"></mat-icon>
+        </button>
+      </td>
+    </tr>
+  </table>
+</div>
