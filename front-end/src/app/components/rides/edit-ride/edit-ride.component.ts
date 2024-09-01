@@ -8,8 +8,8 @@ import {
 } from "@angular/material/dialog";
 import {MatButton} from "@angular/material/button";
 import {Ride} from "../../../model/ride.model";
-import {MatFormField, MatHint, MatLabel, MatOption, MatSelect} from "@angular/material/select";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {MatFormField, MatHint, MatLabel, MatOption, MatSelect, MatSuffix} from "@angular/material/select";
+import {FormsModule} from "@angular/forms";
 import {Make} from "../../../model/make.model";
 import {Model} from "../../../model/model.model";
 import {MatInput} from "@angular/material/input";
@@ -40,10 +40,10 @@ export interface EditRideData {
     MatInput,
     MatIcon,
     MatHint,
-    ReactiveFormsModule,
     MatDatepickerToggle,
     MatDatepicker,
     MatDatepickerInput,
+    MatSuffix,
   ],
   templateUrl: './edit-ride.component.html',
   styleUrl: './edit-ride.component.scss'

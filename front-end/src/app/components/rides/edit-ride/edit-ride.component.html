@@ -18,11 +18,12 @@
       </mat-select>
     </mat-form-field>
   </div>
-  <div><span>{{ data.makeId }}</span> - <span>{{ data.ride.modelId }}</span></div>
   <div>
     <mat-form-field>
       <mat-label>Started at</mat-label>
-      <input matInput type="date" [(ngModel)]="data.ride.startedAt">
+      <input matInput [matDatepicker]="startedAtPicker" [(ngModel)]="data.ride.startedAt">
+      <mat-datepicker-toggle matIconSuffix [for]="startedAtPicker"></mat-datepicker-toggle>
+      <mat-datepicker #startedAtPicker></mat-datepicker>
     </mat-form-field>
     <mat-form-field>
       <mat-label>Started at</mat-label>
