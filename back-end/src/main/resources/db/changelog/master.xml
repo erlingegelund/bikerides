@@ -98,5 +98,23 @@
             <column name="name" type="varchar(255)"/>
             <column name="description" type="varchar(255)"/>
         </loadData>
+        <loadData tableName="makes" file="db/data/makes.csv" separator=";">
+            <column name="id" type="bigint"/>
+            <column name="created_date" type="datetime"/>
+            <column name="last_modified_date" type="datetime"/>
+            <column name="name" type="varchar(255)"/>
+            <column name="origin" type="varchar(255)"/>
+            <column name="website" type="varchar(255)"/>
+            <column name="established" type="date"/>
+            <column name="historical_introduction" type="varchar(255)"/>
+        </loadData>
+        <loadData tableName="models" file="db/data/models.csv" separator=";">
+            <column name="created_date" type="datetime"/>
+            <column name="last_modified_date" type="datetime"/>
+            <column name="make_id" type="bigint"/>
+            <column name="category_id" type="bigint"/>
+            <column name="name" type="varchar(255)"/>
+            <column name="homologated_for_road_use" type="boolean"/>
+        </loadData>
     </changeSet>
 </databaseChangeLog>

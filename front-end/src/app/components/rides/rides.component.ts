@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {AsyncPipe, DatePipe, NgForOf} from "@angular/common";
 import {MatIcon} from "@angular/material/icon";
 import {MatIconButton} from "@angular/material/button";
@@ -8,7 +8,9 @@ import {ModelService} from "../../service/model.service";
 import {MakeService} from "../../service/make.service";
 import {Model} from "../../model/model.model";
 import {Make} from "../../model/make.model";
-import {BehaviorSubject, filter, map, Observable, of} from "rxjs";
+import {filter, forkJoin} from "rxjs";
+import {MatDialog} from "@angular/material/dialog";
+import {EditRideComponent} from "./edit-ride/edit-ride.component";
 
 @Component({
   selector: 'app-rides',
@@ -23,19 +25,23 @@ import {BehaviorSubject, filter, map, Observable, of} from "rxjs";
   templateUrl: './rides.component.html',
   styleUrl: './rides.component.scss'
 })
-export class RidesComponent implements OnInit, OnDestroy {
+export class RidesComponent implements OnInit {
   rides: Ride[] = [];
-  private models = new BehaviorSubject<Model[]>([]);
-  private makes = new BehaviorSubject<Make[]>([]);
-  private loadingModels = false;
-  private loadingMakes = false;
+  private models: Model[] = [];
+  private makes: Make[] = [];
 
-  constructor(private rideService: RideService, private modelService: ModelService, private makeService: MakeService) { }
+  private readonly rideService = inject(RideService);
+  private readonly modelService = inject(ModelService);
+  private readonly makeService =  inject(MakeService);
+  private readonly dialogService = inject(MatDialog);
 
   ngOnInit(): void {
-  }
-
-  ngOnDestroy() {
+    forkJoin([this.modelService.getModelList(), this.makeService.getMakeList(), this.rideService.getRideList()])
+      .subscribe(([models, makes, rides]) => {
+        this.models = models;
+        this.makes = makes;
+        this.rides = rides;
+    });
   }
 
   truncateWithEllipsis(text: string | undefined) {
@@ -45,24 +51,35 @@ export class RidesComponent implements OnInit, OnDestroy {
     return text.length > 20 ? text.substring(0, 20) + '...' : text;
   }
 
-  private loadModels() {
-    if (this.loadingModels) {
-      return;
+  getMake(modelId: number | undefined): string {
+    const makeId = this.models.find(model => model.id === modelId)?.makeId;
+    if (!makeId) {
+      return '';
     }
-    this.loadingModels = true;
-    this.modelService.getModelList().subscribe(data => {
-      this.models.next(data);
-      this.loadingModels = false;
-    });
+    return this.makes.find(make => make.id === makeId)?.name || '';
   }
 
-  getMake(modelId: number | undefined): Observable<string> {
-    return of('');
-    //this.models.pipe(map(models => models.filter(m => m.id === modelId), map(model => this.getMakeName(model.makeId)));
+  getModelName(modelId: number | undefined): string {
+      return this.models.find(model => model.id === modelId)?.name || '';
   }
 
-  getModelName(modelId: number | undefined): Observable<string> {
-      return of('');
+  edit(ride: Ride) {
+    console.log('edit ride', JSON.stringify(ride));
+    const makeId = this.models.find(model => model.id === ride.modelId)?.makeId;
+    const ref = this.dialogService.open(
+      EditRideComponent,
+      {data: {makeId, ride, makes: this.makes, models: this.models}});
+    ref.afterClosed()
+      .pipe(filter(ride => !!ride))
+      .subscribe((result: Ride) => {
+        this.rideService.updateRide(result).subscribe(() => {
+          this.rides = this.rides.map(r => r.id === result.id ? result : r);
+        });
+      });
   }
 
+  newRide() {
+    const ride = {startedAt: new Date(), own: false, distance: 0} as Ride;
+    this.edit(ride);
+  }
 }

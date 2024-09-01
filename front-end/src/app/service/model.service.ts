@@ -5,7 +5,7 @@ import {Observable} from "rxjs";
 
 @Injectable({providedIn: 'root'})
 export class ModelService {
-  private baseUrl = '/api/v1/models';
+  private baseUrl = '/api/bike-rides/models';
 
   constructor(private http: HttpClient) { }
 

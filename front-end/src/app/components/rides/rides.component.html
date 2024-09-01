@@ -1,5 +1,5 @@
 <div class="br-ride">
-  <h2>Makes</h2>
+  <h2>Rides</h2>
   <table>
     <thead>
     <tr>
@@ -11,15 +11,15 @@
       <th>Ownership</th>
       <th>Comment</th>
       <th>
-        <button mat-icon-button>
+        <button mat-icon-button (click)="newRide()">
           <mat-icon fontIcon="add"></mat-icon>
         </button>
       </th>
     </tr>
     </thead>
-    <tr *ngFor="let ride of rides">
+    <tr *ngFor="let ride of rides" (click)="edit(ride)">
       <td>{{ getMake(ride.modelId) }}</td>
-      <td>{{ getModelName(ride.modelId) | async }}</td>
+      <td>{{ getModelName(ride.modelId) }}</td>
       <td>{{ ride.startedAt | date: 'medium'}}</td>
       <td>{{ ride.endedAt | date: 'medium'}}</td>
       <td>{{ ride.distance }}</td>
