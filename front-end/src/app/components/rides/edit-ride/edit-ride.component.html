@@ -1,0 +1,61 @@
+<h2 mat-dialog-title>Edit ride</h2>
+<mat-dialog-content>
+  <div>
+    <mat-form-field>
+      <mat-label>Make</mat-label>
+      <mat-select [(ngModel)]="data.makeId">
+        @for (make of data.makes; track make) {
+          <mat-option [value]="make.id">{{ make.name }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Model</mat-label>
+      <mat-select [(ngModel)]="data.ride.modelId">
+        @for (model of data.models; track model) {
+          <mat-option [value]="model.id">{{ model.name }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div><span>{{ data.makeId }}</span> - <span>{{ data.ride.modelId }}</span></div>
+  <div>
+    <mat-form-field>
+      <mat-label>Started at</mat-label>
+      <input matInput type="date" [(ngModel)]="data.ride.startedAt">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Started at</mat-label>
+      <input matInput type="time">
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field>
+      <mat-label>Distance</mat-label>
+      <input matInput [(ngModel)]="data.ride.distance" min="0" max="999999">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Ownership</mat-label>
+      <mat-select [(ngModel)]="data.ride.own">
+        <mat-option [value]="true">Own</mat-option>
+        <mat-option [value]="false">Dealership</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field>
+      <mat-label>Comment</mat-label>
+      <input matInput [(ngModel)]="data.ride.comment" maxlength="255">
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field>
+      <mat-label>Rating</mat-label>
+      <input matInput [(ngModel)]="data.ride.rating" min="0" max="5">
+    </mat-form-field>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="cancel()">Cancel</button>
+  <button mat-button [mat-dialog-close]="ride()" cdkFocusInitial>Ok</button>
+</mat-dialog-actions>
